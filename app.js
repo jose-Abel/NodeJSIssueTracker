@@ -64,26 +64,6 @@ app.use(mongoSanitize());
 // Data sanitization against cross site scripting attacks XSS
 app.use(xss());
 
-// Prevent parameter pollution
-app.use(
-  hpp({
-    whitelist: [
-      'duration',
-      'ratingsQuantity',
-      'ratingsAverage',
-      'maxGroupSize',
-      'difficulty',
-      'price'
-    ]
-  })
-);
-
-// Test middleware
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  next();
-});
-
 //3) MOUNT ROUTES
 app.use('/api/v1/issues', issueRouter);
 

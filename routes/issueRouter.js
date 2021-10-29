@@ -1,64 +1,24 @@
 const express = require('express');
 
-const tourController = require('./../controllers/tourController');
-
-const authController = require('./../controllers/authController');
-
-const reviewRouter = require('./../routes/reviewRoutes');
+const issueController = require('./../controllers/issueController');
 
 const router = express.Router();
 
-router.use('/:tourId/reviews', reviewRouter);
-
-// router.param('id', tourController.checkID);
-
-router
-  .route('/top-5-cheap')
-  .get(tourController.aliasTopTours, tourController.getAllTours);
-
-router.route('/tour-stats').get(tourController.getTourStats);
-
-router
-  .route('/monthly-plan/:year')
-  .get(
-    authController.protect,
-    authController.restrictTo('admin', 'lead-guide', 'guide'),
-    tourController.getMonthlyPlan
-  );
-
-/* 2 ways to implement url
-/tours-within?distance=233&center=40,45&unit=mi
-/tours-within/233/center/40,45/unit/mi
-
-{{URL}}api/v1/tours/tours-within/233/center/18.50012,-69.98857/unit/mi
-*/
-router
-  .route('/tours-within/:distance/center/:latlng/unit/:unit')
-  .get(tourController.getToursWithin);
-
-router.route('/distances/:latlng/unit/:unit').get(tourController.getDistances);
-
 router
   .route('/')
-  .get(tourController.getAllTours)
+  .get(issueController.getAllIssues)
   .post(
-    authController.protect,
-    authController.restrictTo('admin', 'lead-guide'),
-    tourController.createTour
+    issueController.createTour
   );
 
 router
   .route('/:id')
-  .get(tourController.getTour)
+  .get(issueController.getIssue)
   .patch(
-    authController.protect,
-    authController.restrictTo('admin', 'lead-guide'),
-    tourController.updateTour
+    issueController.updateIssue
   )
   .delete(
-    authController.protect,
-    authController.restrictTo('admin', 'lead-guide'),
-    tourController.deleteTour
+    issueController.deleteIssue
   );
 
 module.exports = router;
