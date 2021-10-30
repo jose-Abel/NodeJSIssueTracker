@@ -8,7 +8,7 @@ router
   .route('/')
   .get(issueController.getAllIssues)
   .post(
-    issueController.createTour
+    issueController.createIssue
   );
 
 router

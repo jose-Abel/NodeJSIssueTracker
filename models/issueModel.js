@@ -4,18 +4,18 @@ const slugify = require('slugify');
 
 const issueSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
-      required: [true, 'An issue must have a name'],
+      required: [true, 'An issue must have a title'],
       unique: true,
       trim: true,
       maxlength: [
         40,
-        'An issue name must have a name less or equal than 40 characters'
+        'An issue title must have a title less or equal than 40 characters'
       ],
       minlength: [
         10,
-        'An issue name must have a name more or equal than 10 characters'
+        'An issue title must have a title more or equal than 10 characters'
       ]
     },
     description: {
@@ -32,7 +32,7 @@ const issueSchema = new mongoose.Schema(
     },
     assigned: {
       type: Boolean,
-      required: [true, 'An issue must have an status'],
+      required: [true, 'An issue must have be assigned'],
     },
     slug: String,
     timeframe: {

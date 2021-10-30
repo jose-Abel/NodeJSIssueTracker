@@ -20,7 +20,9 @@ const AppError = require('./utils/appError');
 
 const globalErrorHandler = require('./controllers/errorController');
 
-const issueRouter = require('./routes/issueRoutes');
+const issueRouter = require('./routes/issueRouter');
+
+const projectRouter = require('./routes/projectRouter');
 
 const app = express();
 
@@ -58,7 +60,6 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
-
 app.use(mongoSanitize());
 
 // Data sanitization against cross site scripting attacks XSS
@@ -66,6 +67,8 @@ app.use(xss());
 
 //3) MOUNT ROUTES
 app.use('/api/v1/issues', issueRouter);
+app.use('/api/v1/projects', projectRouter);
+
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

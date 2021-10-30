@@ -1,8 +1,10 @@
+const Issue = require('./../models/issueModel');
+
 const catchAsync = require('./../utils/catchAsync');
 
 const AppError = require('./../utils/appError');
 
-exports.deleteIssue = Issue =>
+exports.deleteIssue = () =>
   catchAsync(async (req, res, next) => {
     const issue = await Issue.findByIdAndDelete(req.params.id);
 
@@ -16,7 +18,7 @@ exports.deleteIssue = Issue =>
     });
   });
 
-exports.updateIssue = Issue =>
+exports.updateIssue = () =>
   catchAsync(async (req, res, next) => {
     const issue = await Issue.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -35,7 +37,7 @@ exports.updateIssue = Issue =>
     });
   });
 
-exports.createIssue = Issue =>
+exports.createIssue = () =>
   catchAsync(async (req, res, next) => {
     const issue = await Issue.create(req.body);
 
@@ -47,7 +49,7 @@ exports.createIssue = Issue =>
     });
   });
 
-exports.getIssue = (Issue) =>
+exports.getIssue = () =>
   catchAsync(async (req, res, next) => {
     let query = Issue.findById(req.params.id);
 
@@ -65,7 +67,7 @@ exports.getIssue = (Issue) =>
     });
   });
 
-exports.getAllIssues = Issue =>
+exports.getAllIssues = () =>
   catchAsync(async (req, res, next) => {
     const issues = await Issue.find();
 
