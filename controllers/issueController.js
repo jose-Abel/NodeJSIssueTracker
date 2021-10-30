@@ -1,8 +1,8 @@
-const Issue = require('./../models/issueModel');
+const Issue = require('../models/issueModel');
 
-const catchAsync = require('./../utils/catchAsync');
+const catchAsync = require('../utils/catchAsync');
 
-const AppError = require('./../utils/appError');
+const AppError = require('../utils/appError');
 
 exports.deleteIssue = () =>
   catchAsync(async (req, res, next) => {

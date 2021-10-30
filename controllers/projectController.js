@@ -70,7 +70,6 @@ exports.getProject = catchAsync(async (req, res, next) => {
   });
 
 exports.getAllProjects = catchAsync(async (req, res, next) => {
-    console.log("Get all Projects is running")
     const projects = await Project.find();
 
     //SEND RESPONSE
