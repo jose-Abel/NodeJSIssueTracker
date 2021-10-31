@@ -24,6 +24,8 @@ const issueRouter = require('./routes/issueRouter');
 
 const projectRouter = require('./routes/projectRouter');
 
+const userRouter = require('./routes/userRouter');
+
 const app = express();
 
 //1) GLOBAL MIDDLEWARES
@@ -68,6 +70,7 @@ app.use(xss());
 //3) MOUNT ROUTES
 app.use('/api/v1/issues', issueRouter);
 app.use('/api/v1/projects', projectRouter);
+app.use('/api/v1/projects', userRouter);
 
 
 app.all('*', (req, res, next) => {
