@@ -1,31 +1,17 @@
 const path = require('path');
-
 const express = require('express');
-
 const morgan = require('morgan');
-
 const rateLimit = require('express-rate-limit');
-
 const helmet = require('helmet');
-
 const mongoSanitize = require('express-mongo-sanitize');
-
 const xss = require('xss-clean');
-
 const hpp = require('hpp');
-
 const cookieParser = require('cookie-parser');
-
 const AppError = require('./utils/appError');
-
 const globalErrorHandler = require('./controllers/errorController');
-
 const issueRouter = require('./routes/issueRouter');
-
 const projectRouter = require('./routes/projectRouter');
-
 const userRouter = require('./routes/userRouter');
-
 const app = express();
 
 //1) GLOBAL MIDDLEWARES
@@ -70,7 +56,7 @@ app.use(xss());
 //3) MOUNT ROUTES
 app.use('/api/v1/issues', issueRouter);
 app.use('/api/v1/projects', projectRouter);
-app.use('/api/v1/projects', userRouter);
+app.use('/api/v1/users', userRouter);
 
 
 app.all('*', (req, res, next) => {

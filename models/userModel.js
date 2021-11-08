@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-
 const validator = require('validator');
-
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
@@ -18,7 +16,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['manager', 'admin', 'team-lead', 'developer', 'designer'],
+    enum: ['manager', 'admin', 'team-lead', 'developer', 'designer', 'user'],
     default: 'user'
   },
   password: {
@@ -49,6 +47,14 @@ userSchema.pre('save', async function(next) {
 
   next();
 });
+
+
+userSchema.methods.correctPassword = async function(
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 
 const User = mongoose.model('User', userSchema);
