@@ -5,18 +5,24 @@ const authController = require('../controllers/authController');
 
 router
   .route('/')
-  .get(projectController.getAllProjects)
+  .get(
+    authController.protect, 
+    projectController.getAllProjects)
   .post(authController.protect,
+    authController.restrictTo('manager', 'admin'),
     projectController.createProject
   );
 
 router
   .route('/:id')
-  .get(authController.protect, projectController.getProject)
+  .get(authController.protect, 
+    projectController.getProject)
   .patch(authController.protect,
+    authController.restrictTo('manager', 'admin'),
     projectController.updateProject
   )
   .delete(authController.protect,
+    authController.restrictTo('manager', 'admin'),
     projectController.deleteProject
   );
 
